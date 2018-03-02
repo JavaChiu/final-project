@@ -50,7 +50,10 @@ class PostDetailViewController: UIViewController {
         if let latitude = self.latitude, let longitude = self.longitude {
             let initialLocation = CLLocationCoordinate2DMake(latitude, longitude)
             let coordinateRegion = MKCoordinateRegionMakeWithDistance(initialLocation,                                                                      regionRadius, regionRadius)
+            let pin = MapAnnotation(title: "Pick up location",
+                                    subtitle: "", coordinate: initialLocation)            
             mapView.setRegion(coordinateRegion, animated: true)
+            mapView.addAnnotation(pin)
         }
         
         if let description = self.itemDescription {
