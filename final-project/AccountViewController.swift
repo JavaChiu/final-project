@@ -35,7 +35,7 @@ extension AccountViewController: LoginButtonDelegate {
         print("logged out")
         
         let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-        let nextViewController = storyBoard.instantiateViewController(withIdentifier: "LoginViewController") 
+        let nextViewController = storyBoard.instantiateViewController(withIdentifier: "LoginViewController")
         self.present(nextViewController, animated:true, completion:nil)
     }
 }

@@ -80,6 +80,10 @@ extension LoginViewController: LoginButtonDelegate {
     func loginButtonDidCompleteLogin(_ loginButton: LoginButton, result: LoginResult) {
         print("logged in")
         self.getFBUserData()
+        
+        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        let nextViewController = storyBoard.instantiateViewController(withIdentifier: "MainTabView") as! UITabBarController
+        self.present(nextViewController, animated:true, completion:nil)
     }
     
     func loginButtonDidLogOut(_ loginButton: LoginButton) {
