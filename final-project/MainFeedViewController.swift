@@ -13,7 +13,6 @@ class MainFeedViewController: UIViewController {
     var posts: Posts?
     
     // MARK: outlet
-//    @IBOutlet weak var mainFeedTableView: UITableView!
     @IBOutlet weak var mainFeedTableView: UITableView!
     
     
@@ -30,6 +29,19 @@ class MainFeedViewController: UIViewController {
         self.mainFeedTableView.dataSource = self
         self.mainFeedTableView.estimatedRowHeight = 100
         self.mainFeedTableView.rowHeight = UITableViewAutomaticDimension
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showPostDetail" {
+            if let indexPath = self.mainFeedTableView.indexPathForSelectedRow {
+                let currentPost = self.posts?.postArray[indexPath.row]
+                let controller = segue.destination as! PostDetailViewController
+                controller.titleText = currentPost?.title
+                controller.itemDescription = currentPost?.description
+                controller.longitude = currentPost?.longitude
+                controller.latitude = currentPost?.latitude
+            }
+        }
     }
 }
 
@@ -52,8 +64,7 @@ extension MainFeedViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "mainFeedCell", for: indexPath) as! MainFeedTableViewCell
         
         let currentPost = posts?.postArray[indexPath.row]
-//        cell.textLabel!.text = object
-        cell.descriptionLabel.text = currentPost?.description
+        cell.titleLabel.text = currentPost?.title
         return cell
     }
 }

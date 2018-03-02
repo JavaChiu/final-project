@@ -31,31 +31,35 @@ var mockDictionary = [
     "postArray": [
         [
             "post_id": 1,
+            "title": "This is the first one.",
             "img_url": "imgs/1.png",
             "description": "This is the first one.",
-            "locationX": 100,
-            "locationY": 100
+            "latitude": 41.794241,
+            "longitude": -87.599056
         ],
         [
             "post_id": 2,
+            "title": "This is the second one.",
             "img_url": "imgs/2.png",
             "description": "This is the second one.",
-            "locationX": 100,
-            "locationY": 100
+            "latitude": 41.794241,
+            "longitude": -87.599056
         ],
         [
             "post_id": 3,
+            "title": "This is the third one.",
             "img_url": "imgs/3.png",
             "description": "This is the third one.",
-            "locationX": 100,
-            "locationY": 100
+            "latitude": 41.794241,
+            "longitude": -87.599056
         ],
         [
             "post_id": 4,
+            "title": "This is the forth one.",
             "img_url": "imgs/4.png",
             "description": "This is the forth one.",
-            "locationX": 100,
-            "locationY": 100
+            "latitude": 41.794241,
+            "longitude": -87.599056
         ]
     ]
 ]

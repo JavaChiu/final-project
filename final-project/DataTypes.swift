@@ -15,8 +15,9 @@ struct Posts: Codable {
 /// Data about the `Article`
 struct SinglePost: Codable {
     var post_id: Int
+    var title: String
     var img_url: URL
     var description: String
-    var locationX: Int
-    var locationY: Int
+    var latitude: Double
+    var longitude: Double
 }
