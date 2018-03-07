@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -63,7 +64,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="opc-Fe-9s8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1529" y="-1048"/>
+            <point key="canvasLocation" x="1529" y="-1068"/>
         </scene>
         <!--Post Detail View Controller-->
         <scene sceneID="oqf-Ks-Hwy">
@@ -117,7 +118,7 @@
             </objects>
             <point key="canvasLocation" x="2367" y="-1068"/>
         </scene>
-        <!--My Posts-->
+        <!--My Post-->
         <scene sceneID="Fp4-kA-dLq">
             <objects>
                 <viewController id="t0B-iZ-ZsD" sceneMemberID="viewController">
@@ -127,7 +128,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="WIq-BL-Kaz"/>
                     </view>
-                    <navigationItem key="navigationItem" title="My Posts" id="NRt-2h-9Mn"/>
+                    <navigationItem key="navigationItem" title="My Post" id="NRt-2h-9Mn"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ArF-L1-Urj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -156,23 +157,86 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="G7M-wv-Qcf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="209" y="1822"/>
+            <point key="canvasLocation" x="-767" y="779"/>
         </scene>
-        <!--Add-->
+        <!--New Giveaway-->
         <scene sceneID="wg7-f3-ORb">
             <objects>
-                <viewController id="8rJ-Kc-sve" customClass="SecondViewController" customModule="final_project" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController hidesBottomBarWhenPushed="YES" id="8rJ-Kc-sve" customClass="NewPostViewController" customModule="final_project" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="QS5-Rx-YEW">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ojb-BR-D9f">
+                                <rect key="frame" x="0.0" y="64" width="375" height="375"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="ojb-BR-D9f" secondAttribute="height" multiplier="1:1" id="9Zt-Ix-zDl"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QaL-ic-I7D">
+                                <rect key="frame" x="113" y="218" width="150" height="56"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Pick a New Photo">
+                                    <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="addNewMedia" destination="8rJ-Kc-sve" eventType="touchUpInside" id="3AT-7U-SG2"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cdr-YP-Gtv">
+                                <rect key="frame" x="343" y="64" width="32" height="32"/>
+                                <state key="normal" image="X"/>
+                                <connections>
+                                    <action selector="removeMedia" destination="8rJ-Kc-sve" eventType="touchUpInside" id="4EM-Ei-iY8"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="ojb-BR-D9f" firstAttribute="top" secondItem="O1u-W8-tvY" secondAttribute="top" id="OdB-aC-aWu"/>
+                            <constraint firstItem="cdr-YP-Gtv" firstAttribute="trailing" secondItem="ojb-BR-D9f" secondAttribute="trailing" id="U7o-an-zZS"/>
+                            <constraint firstItem="cdr-YP-Gtv" firstAttribute="top" secondItem="ojb-BR-D9f" secondAttribute="top" id="ezq-lh-lxP"/>
+                            <constraint firstItem="ojb-BR-D9f" firstAttribute="width" secondItem="QS5-Rx-YEW" secondAttribute="width" id="sE0-cD-Ljt"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="O1u-W8-tvY"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Add" image="add" id="cPa-gy-q4n"/>
+                    <navigationItem key="navigationItem" title="New Giveaway" id="G0o-B9-unZ">
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="YcK-C4-PAU">
+                            <connections>
+                                <action selector="cancel" destination="8rJ-Kc-sve" id="u84-KQ-Om2"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Next" id="Twt-pZ-qPl">
+                            <connections>
+                                <segue destination="iiF-rQ-tgE" kind="show" id="Nc0-Bq-YWd"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="addImageButton" destination="QaL-ic-I7D" id="oZG-hu-Q54"/>
+                        <outlet property="photoImageView" destination="ojb-BR-D9f" id="tzL-hL-THR"/>
+                        <outlet property="removeImageButton" destination="cdr-YP-Gtv" id="v3b-Ra-eY1"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="748" y="343"/>
+            <point key="canvasLocation" x="1528.8" y="341.37931034482762"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="GqA-7Q-vpo">
+            <objects>
+                <viewController id="iiF-rQ-tgE" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="57C-wf-6AP">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="wKt-co-4c3"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NxP-wc-h7b" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2366" y="341"/>
         </scene>
         <!--Message-->
         <scene sceneID="ebG-p6-axV">
@@ -188,7 +252,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="E7F-lw-Zcy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="748" y="1063"/>
+            <point key="canvasLocation" x="-2" y="780"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="UHv-Qi-ppd">
@@ -206,7 +270,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VAu-UT-aFz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1070" y="0.0"/>
+            <point key="canvasLocation" x="-767" y="0.0"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="yl2-sM-qoP">
@@ -220,7 +284,7 @@
                     <connections>
                         <segue destination="iBJ-jS-bVf" kind="relationship" relationship="viewControllers" id="vtU-jr-Q6k"/>
                         <segue destination="pQ8-qi-P8p" kind="relationship" relationship="viewControllers" id="w5U-Nt-eTe"/>
-                        <segue destination="8rJ-Kc-sve" kind="relationship" relationship="viewControllers" id="9D5-hi-wHq"/>
+                        <segue destination="Unj-Pe-GdT" kind="relationship" relationship="viewControllers" id="9D5-hi-wHq"/>
                         <segue destination="cCV-zN-qL6" kind="relationship" relationship="viewControllers" id="W4q-12-Hqr"/>
                         <segue destination="9lY-Nb-Xk1" kind="relationship" relationship="viewControllers" id="OrN-J9-X1Z"/>
                     </connections>
@@ -267,8 +331,28 @@
             </objects>
             <point key="canvasLocation" x="748" y="-351"/>
         </scene>
+        <!--Add-->
+        <scene sceneID="1sJ-eE-mfv">
+            <objects>
+                <navigationController storyboardIdentifier="NewPostNavigationController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Unj-Pe-GdT" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Add" image="add" id="cPa-gy-q4n"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="fwq-0r-Qvb">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="8rJ-Kc-sve" kind="relationship" relationship="rootViewController" id="LF1-9R-oL5"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="G3z-DW-Kwq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="747.20000000000005" y="342.72863568215894"/>
+        </scene>
     </scenes>
     <resources>
+        <image name="X" width="32" height="32"/>
         <image name="add" width="24" height="24"/>
         <image name="first" width="30" height="30"/>
         <image name="message" width="25" height="25"/>
