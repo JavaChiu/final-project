@@ -24,7 +24,7 @@ class MainFeedViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        self.tabBarController?.delegate = UIApplication.shared.delegate as? UITabBarControllerDelegate
         self.mainFeedTableView.delegate = self
         self.mainFeedTableView.dataSource = self
         self.mainFeedTableView.estimatedRowHeight = 100

@@ -15,7 +15,7 @@ class MediaManager: NSObject {
 
     // MARK: Properties
     fileprivate var vc: UIViewController!
-    var imageProcessing: ((UIImage) -> Void)?
+    var imageProcessing: ((UIImage?) -> Void)?
     
     private func pickMedia(from source: UIImagePickerControllerSourceType) {
         if UIImagePickerController.isSourceTypeAvailable(source) {
@@ -27,7 +27,7 @@ class MediaManager: NSObject {
         }
     }
 
-    func showActionSheet(vc: UIViewController) {
+    func showActionSheet(vc: UIViewController, removePhoto: Bool = false) {
         self.vc = vc
         let actionSheet = UIAlertController(title: "Pick a Photo", message: nil, preferredStyle: .actionSheet)
         actionSheet.addAction(UIAlertAction(title: "Camera", style: .default, handler: { (alert: UIAlertAction!) -> Void in
@@ -36,6 +36,11 @@ class MediaManager: NSObject {
         actionSheet.addAction(UIAlertAction(title: "Library", style: .default, handler: { (alert: UIAlertAction!) -> Void in
             self.pickMedia(from: .photoLibrary)
         }))
+        if removePhoto {
+            actionSheet.addAction(UIAlertAction(title: "Remove Photo", style: .destructive, handler: { (alert: UIAlertAction!) -> Void in
+                self.imageProcessing?(nil)
+            }))
+        }
         actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
         vc.present(actionSheet, animated: true, completion: nil)
