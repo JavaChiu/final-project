@@ -11,6 +11,7 @@ import UIKit
 class MainFeedViewController: UIViewController {
     // MARK: properties
     var posts: Posts?
+    var infromedNetworkStatus: Bool = false
     
     // MARK: outlet
     @IBOutlet weak var mainFeedTableView: UITableView!
@@ -20,6 +21,7 @@ class MainFeedViewController: UIViewController {
         super.viewWillAppear(animated)
         
         self.posts = MockData.sharedInstance.getAllPost()
+//        getMainFeed(url: WebService.mainFeed.rawValue)
     }
     
     override func viewDidLoad() {
@@ -29,8 +31,10 @@ class MainFeedViewController: UIViewController {
         self.mainFeedTableView.dataSource = self
         self.mainFeedTableView.estimatedRowHeight = 100
         self.mainFeedTableView.rowHeight = UITableViewAutomaticDimension
+        
     }
     
+    // MARK: Segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showPostDetail" {
             if let indexPath = self.mainFeedTableView.indexPathForSelectedRow {
@@ -38,10 +42,42 @@ class MainFeedViewController: UIViewController {
                 let controller = segue.destination as! PostDetailViewController
                 controller.titleText = currentPost?.title
                 controller.itemDescription = currentPost?.description
-                controller.longitude = currentPost?.longitude
-                controller.latitude = currentPost?.latitude
+//                controller.longitude = currentPost?.longitude
+//                controller.latitude = currentPost?.latitude
             }
         }
+    }
+    
+    // MARK: private functions
+    
+    private func getMainFeed(url: String) {        
+        do {
+            try SharedNetworking.sharedInstance.getMainFeed(url: url) { (posts) in
+                self.posts = posts
+                
+                DispatchQueue.main.async {
+                    // Update any views with the newly downloaded news data
+                    UIApplication.shared.isNetworkActivityIndicatorVisible = false
+                    self.mainFeedTableView?.reloadData()
+                }
+            }
+        } catch NetWorkError.noConnection {
+            if !self.infromedNetworkStatus {
+                self.netWorkErrorAlert(message: "You seem to be offline")
+                self.infromedNetworkStatus = true
+            }
+        } catch NetWorkError.invalidURL {
+            self.netWorkErrorAlert(message: "There's an error in URL")
+        } catch {
+            print(Error.self)
+        }
+    }
+    
+    private func netWorkErrorAlert(message: String) {
+        let alert = UIAlertController(title: "Oops!", message: message , preferredStyle: .alert)
+        let action = UIAlertAction(title:"OK", style: .default, handler: nil)
+        alert.addAction(action)
+        self.present(alert, animated: true, completion: nil)
     }
 }
 
@@ -65,6 +101,7 @@ extension MainFeedViewController: UITableViewDataSource {
         
         let currentPost = posts?.postArray[indexPath.row]
         cell.titleLabel.text = currentPost?.title
+        cell.descriptionLabel.text = currentPost?.description
         return cell
     }
 }

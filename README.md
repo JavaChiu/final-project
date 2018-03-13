@@ -3,6 +3,12 @@ This project uses "cocoapods", https://cocoapods.org/, so while developing, you 
 
 # Working-on
 - Jerry: NewPostViewController
+- Andrew:
+1. Backend Service: Hosted a rest service on aws, but since iOS requires SSL connection, probably can't integrate with it right now. Tried with self-served SSL, no use.
+https://ec2-34-211-177-131.us-west-2.compute.amazonaws.com:8443/swagger-ui.html#!/
+https://ec2-34-211-177-131.us-west-2.compute.amazonaws.com:8443/api/users
+https://ec2-34-211-177-131.us-west-2.compute.amazonaws.com:8443/api/items
+2. MainFeedViewController
 
 # To-do list
 - NewPostViewController

@@ -12,12 +12,22 @@ struct Posts: Codable {
     var postArray: [SinglePost]
 }
 
-/// Data about the `Article`
 struct SinglePost: Codable {
-    var post_id: Int
+    var id: Int
     var title: String
-    var img_url: URL
     var description: String
-    var latitude: Double
-    var longitude: Double
+    var gived: Bool
+    var imgUrl: URL
+    var pickupAddress: String
+//    var user: User
 }
+
+//struct User: Codable {
+//    var id: Int
+//    var address: String
+//    var description: String
+//    var email: String
+//    var facebookId: Int
+//    var userName: String
+//}
+
