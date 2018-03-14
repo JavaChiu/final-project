@@ -13,7 +13,8 @@ class MainFeedTableViewCell: UITableViewCell {
     // MARK: outlet  
     @IBOutlet weak var itemImage: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var userName: UILabel!
+    @IBOutlet weak var userImage: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()

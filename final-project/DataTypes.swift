@@ -19,15 +19,16 @@ struct SinglePost: Codable {
     var gived: Bool
     var imgUrl: URL
     var pickupAddress: String
-//    var user: User
+    var date: String
+    var user: User
 }
 
-//struct User: Codable {
-//    var id: Int
-//    var address: String
-//    var description: String
-//    var email: String
-//    var facebookId: Int
-//    var userName: String
-//}
+struct User: Codable {
+    var id: Int
+    var address: String
+    var description: String
+    var email: String
+    var facebookId: Int
+    var userName: String
+}
 

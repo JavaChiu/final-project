@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 class MockData {
     
@@ -25,41 +26,115 @@ class MockData {
         return posts!
     }
     
+    func getItemImage(url: URL) -> UIImage {
+        var itemImage:UIImage? = nil
+        
+        switch url.absoluteString {
+        case "imgs/1.png":
+            itemImage = UIImage(named: "pizza")
+        case "imgs/2.png":
+            itemImage = UIImage(named: "sandwiches")
+        case "imgs/3.png":
+            itemImage = UIImage(named: "bread")
+        case "imgs/4.png":
+            itemImage = UIImage(named: "noodles")
+        default:
+            break
+        }
+        
+        return itemImage!
+    }
+    
+    func getUserImage(url: URL) -> UIImage {
+        var userImage:UIImage? = nil
+        
+        switch url.absoluteString {
+        case "imgs/1.png":
+            userImage = UIImage(named: "person")
+        case "imgs/2.png":
+            userImage = UIImage(named: "person")
+        case "imgs/3.png":
+            userImage = UIImage(named: "person")
+        case "imgs/4.png":
+            userImage = UIImage(named: "person")
+        default:
+            userImage = UIImage(named: "person")
+            break
+        }
+        
+        return userImage!
+    }
 }
 
 var mockDictionary = [
     "postArray": [
         [
             "id": 1,
-            "title": "This is the first one.",
-            "description": "first desc",
+            "title": "Some pizzas from party last night",
+            "description": "From last night's party. Ordered too much.From last night's party. Ordered too much.From last night's party. Ordered too much.From last night's party. Ordered too much.",
             "imgUrl": "imgs/1.png",
             "gived": false,
-            "pickupAddress": "somewhere"
+            "pickupAddress": "5400 South Drexel Avenue",
+            "date": "2018-03-13",
+            "user": [
+                "id": 1,
+                "address": "somewhere",
+                "description": "description",
+                "email": "String",
+                "facebookId": 123,
+                "userName": "AChiu"
+            ]
         ],
         [
             "id": 2,
-            "title": "This is the second one.",
+            "title": "Sandwiches, still good",
             "description": "first desc",
-            "imgUrl": "imgs/1.png",
+            "imgUrl": "imgs/2.png",
             "gived": false,
-            "pickupAddress": "somewhere"
+            "pickupAddress": "5400 South Drexel Avenue",
+            "date": "2018-03-13",
+            "user": [
+                "id": 1,
+                "address": "somewhere",
+                "description": "description",
+                "email": "String",
+                "facebookId": 123,
+                "userName": "AChiu"
+            ]
         ],
         [
             "id": 3,
-            "title": "This is the third one.",
+            "title": "Fresh bread",
             "description": "first desc",
-            "imgUrl": "imgs/1.png",
+            "imgUrl": "imgs/3.png",
             "gived": false,
-            "pickupAddress": "somewhere"
+            "pickupAddress": "5400 South Drexel Avenue",
+            "date": "2018-03-13",
+            "user": [
+                "id": 1,
+                "address": "somewhere",
+                "description": "description",
+                "email": "String",
+                "facebookId": 123,
+                "userName": "AChiu"
+            ]
         ],
         [
             "id": 4,
-            "title": "This is the forth one.",
+            "title": "Instant noodles",
             "description": "first desc",
-            "imgUrl": "imgs/1.png",
+            "imgUrl": "imgs/4.png",
             "gived": false,
-            "pickupAddress": "somewhere"
+            "pickupAddress": "5400 South Drexel Avenue",
+            "date": "2018-03-13",
+            "user": [
+                "id": 1,
+                "address": "somewhere",
+                "description": "description",
+                "email": "String",
+                "facebookId": 123,
+                "userName": "AChiu"
+            ]
         ]
     ]
 ]

@@ -14,9 +14,13 @@ class PostDetailViewController: UIViewController {
     // MARK: properties
     var titleText: String?
     var itemImage: UIImage?
+    var address: String?
     var latitude: Double?
     var longitude: Double?
     var itemDescription: String?
+    var date: String?
+    var userImage: UIImage?
+    var userName: String?
     let regionRadius: CLLocationDistance = 1000
     
     // MARK: outlet
@@ -24,6 +28,10 @@ class PostDetailViewController: UIViewController {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var addressLabel: UILabel!
+    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var userImageView: UIImageView!
+    @IBOutlet weak var userNameLabel: UILabel!
     
     
     override func viewDidLoad() {
@@ -56,8 +64,45 @@ class PostDetailViewController: UIViewController {
             mapView.addAnnotation(pin)
         }
         
+        if let address = self.address {
+            self.addressLabel.text = address
+            
+            //
+            let geoCoder = CLGeocoder()
+            geoCoder.geocodeAddressString(address) { (placemarks, error) in
+                guard
+                    let placemarks = placemarks,
+                    let location = placemarks.first?.location
+                    else {
+                        // handle no location found
+                        return
+                }
+                
+                // Use your location
+                let initialLocation = CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude)
+                let coordinateRegion = MKCoordinateRegionMakeWithDistance(initialLocation,                                                                      self.regionRadius, self.regionRadius)
+                self.mapView.setRegion(coordinateRegion, animated: true)
+                
+                let pin = MapAnnotation(title: "Pick up location",
+                                        subtitle: "", coordinate: initialLocation)
+                self.mapView.addAnnotation(pin)
+            }
+        }
+        
         if let description = self.itemDescription {
             self.descriptionLabel.text = description
+        }
+        
+        if let date = self.date {
+            self.dateLabel.text = date
+        }
+        
+        if let user = self.userName {
+            self.userNameLabel.text = user
+        }
+        
+        if let userImage = self.userImage {
+            self.userImageView.image = userImage
         }
     }
     

@@ -29,7 +29,7 @@ class MainFeedViewController: UIViewController {
         self.tabBarController?.delegate = UIApplication.shared.delegate as? UITabBarControllerDelegate
         self.mainFeedTableView.delegate = self
         self.mainFeedTableView.dataSource = self
-        self.mainFeedTableView.estimatedRowHeight = 100
+        self.mainFeedTableView.estimatedRowHeight = 300
         self.mainFeedTableView.rowHeight = UITableViewAutomaticDimension
         
     }
@@ -42,8 +42,11 @@ class MainFeedViewController: UIViewController {
                 let controller = segue.destination as! PostDetailViewController
                 controller.titleText = currentPost?.title
                 controller.itemDescription = currentPost?.description
-//                controller.longitude = currentPost?.longitude
-//                controller.latitude = currentPost?.latitude
+                controller.itemImage = MockData.sharedInstance.getItemImage(url: (currentPost?.imgUrl)!)
+                controller.address = currentPost?.pickupAddress
+                controller.date = currentPost?.date
+                controller.userName = (currentPost?.user.userName)!
+                controller.userImage = MockData.sharedInstance.getUserImage(url: URL(string: "123")!)
             }
         }
     }
@@ -79,6 +82,33 @@ class MainFeedViewController: UIViewController {
         alert.addAction(action)
         self.present(alert, animated: true, completion: nil)
     }
+    
+    // resize in order to make the image fit table cell
+    func resizeImage(image: UIImage, targetSize: CGSize) -> UIImage {
+        let size = image.size
+        
+        let widthRatio  = targetSize.width  / size.width
+        let heightRatio = targetSize.height / size.height
+        
+        // Figure out what our orientation is, and use that to form the rectangle
+        var newSize: CGSize
+        if(widthRatio > heightRatio) {
+            newSize = CGSize(width: size.width * heightRatio, height: size.height * heightRatio)
+        } else {
+            newSize = CGSize(width: size.width * widthRatio,  height: size.height * widthRatio)
+        }
+        
+        // This is the rect that we've calculated out and this is what is actually used below
+        let rect = CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height)
+        
+        // Actually do the resizing to the rect using the ImageContext stuff
+        UIGraphicsBeginImageContextWithOptions(newSize, false, 1.0)
+        image.draw(in: rect)
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return newImage!
+    }
 }
 
 extension MainFeedViewController: UITableViewDelegate {
@@ -101,7 +131,15 @@ extension MainFeedViewController: UITableViewDataSource {
         
         let currentPost = posts?.postArray[indexPath.row]
         cell.titleLabel.text = currentPost?.title
-        cell.descriptionLabel.text = currentPost?.description
+        let tempImage = MockData.sharedInstance.getItemImage(url: (currentPost?.imgUrl)!)
+        cell.itemImage.image = resizeImage(image: tempImage, targetSize: CGSize.init(width: self.mainFeedTableView.width-100, height: self.mainFeedTableView.width-100))
+        cell.userImage.image = MockData.sharedInstance.getUserImage(url: URL(string: "123")!)
+        cell.userName.text = currentPost?.user.userName
+        
+        cell.preservesSuperviewLayoutMargins = false
+        cell.separatorInset = UIEdgeInsets.zero
+        cell.layoutMargins = UIEdgeInsets.zero
+        
         return cell
     }
 }
