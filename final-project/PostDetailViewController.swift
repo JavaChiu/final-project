@@ -38,6 +38,7 @@ class PostDetailViewController: UIViewController {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
+        addToolBar()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -104,6 +105,23 @@ class PostDetailViewController: UIViewController {
         if let userImage = self.userImage {
             self.userImageView.image = userImage
         }
+    }
+    
+    private func addToolBar() {
+        self.navigationController?.isToolbarHidden = false
+        
+        var items = [UIBarButtonItem]()
+        
+        items.append(UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil))
+        items.append(UIBarButtonItem(title: "Request", style: .plain, target: self, action: #selector(add)))
+        items.append(UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil))
+        
+        
+        self.toolbarItems = items
+    }
+    
+    @objc func add(sender: Any){
+        
     }
     
 }
