@@ -18,6 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
     // MARK: Facebook SDK
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         self.launchFromTerminated = true
+        registerSettingsBundle()
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
     }
     
@@ -63,6 +64,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
+    // MARK: private functions
+    
+    func registerSettingsBundle(){
+        let appDefaults = [String:AnyObject]()
+        UserDefaults.standard.register(defaults: appDefaults)
+        UserDefaults.standard.synchronize()
+        
+        if let firstLaunch = UserDefaults.standard.string(forKey: "first_launch") {
+            print(firstLaunch)
+        } else {
+            UserDefaults.standard.setValue(Date().dateString(), forKey: "first_launch")
+        }
+    }
 
 }
 

@@ -71,6 +71,7 @@
 		51E4C1EE2055BE1C00A2FEA5 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E4C1B92055BE1B00A2FEA5 /* TextField.swift */; };
 		51E4C1EF2055BE1C00A2FEA5 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E4C1BA2055BE1B00A2FEA5 /* Button.swift */; };
 		C83D20BF205A45F20051E378 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C83D20BE205A45F20051E378 /* SplashViewController.swift */; };
+		C83D20C1205ABC920051E378 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = C83D20C0205ABC920051E378 /* Settings.bundle */; };
 		C883BA15205A32480036EF0A /* Splash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C883BA14205A32480036EF0A /* Splash.storyboard */; };
 		C892A2F7203A82A5000807D6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C892A2F6203A82A5000807D6 /* AppDelegate.swift */; };
 		C892A2FB203A82A5000807D6 /* NewPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C892A2FA203A82A5000807D6 /* NewPostViewController.swift */; };
@@ -152,6 +153,7 @@
 		6F7CB94AAC1B57B858BB0386 /* Pods_final_project.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_final_project.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F21D58DFD4535DD00535CFC /* Pods-final-project.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-final-project.debug.xcconfig"; path = "Pods/Target Support Files/Pods-final-project/Pods-final-project.debug.xcconfig"; sourceTree = "<group>"; };
 		C83D20BE205A45F20051E378 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
+		C83D20C0205ABC920051E378 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		C883BA14205A32480036EF0A /* Splash.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Splash.storyboard; sourceTree = "<group>"; };
 		C892A2F3203A82A5000807D6 /* final-project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "final-project.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C892A2F6203A82A5000807D6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -474,6 +476,7 @@
 		C892A2EA203A82A5000807D6 = {
 			isa = PBXGroup;
 			children = (
+				C83D20C0205ABC920051E378 /* Settings.bundle */,
 				513547DC204CB173003BEC7F /* README.md */,
 				C892A2F5203A82A5000807D6 /* final-project */,
 				C892A2F4203A82A5000807D6 /* Products */,
@@ -587,6 +590,7 @@
 				513547DD204CB173003BEC7F /* README.md in Resources */,
 				C892A2FE203A82A5000807D6 /* Main.storyboard in Resources */,
 				C883BA15205A32480036EF0A /* Splash.storyboard in Resources */,
+				C83D20C1205ABC920051E378 /* Settings.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
