@@ -113,15 +113,18 @@ class PostDetailViewController: UIViewController {
         var items = [UIBarButtonItem]()
         
         items.append(UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil))
-        items.append(UIBarButtonItem(title: "Request", style: .plain, target: self, action: #selector(add)))
+        items.append(UIBarButtonItem(title: "Request", style: .plain, target: self, action: #selector(request)))
         items.append(UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil))
         
         
         self.toolbarItems = items
     }
     
-    @objc func add(sender: Any){
-        
+    @objc func request(sender: Any){
+        let alert = UIAlertController(title: "Oops!", message: "Feature not supported yet." , preferredStyle: .alert)
+        let action = UIAlertAction(title:"OK", style: .default, handler: nil)
+        alert.addAction(action)
+        self.present(alert, animated: true, completion: nil)
     }
     
 }

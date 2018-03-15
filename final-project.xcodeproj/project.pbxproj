@@ -70,6 +70,8 @@
 		51E4C1ED2055BE1C00A2FEA5 /* GradientSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E4C1B82055BE1B00A2FEA5 /* GradientSlider.swift */; };
 		51E4C1EE2055BE1C00A2FEA5 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E4C1B92055BE1B00A2FEA5 /* TextField.swift */; };
 		51E4C1EF2055BE1C00A2FEA5 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E4C1BA2055BE1B00A2FEA5 /* Button.swift */; };
+		C83D20BF205A45F20051E378 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C83D20BE205A45F20051E378 /* SplashViewController.swift */; };
+		C883BA15205A32480036EF0A /* Splash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C883BA14205A32480036EF0A /* Splash.storyboard */; };
 		C892A2F7203A82A5000807D6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C892A2F6203A82A5000807D6 /* AppDelegate.swift */; };
 		C892A2FB203A82A5000807D6 /* NewPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C892A2FA203A82A5000807D6 /* NewPostViewController.swift */; };
 		C892A2FE203A82A5000807D6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C892A2FC203A82A5000807D6 /* Main.storyboard */; };
@@ -149,6 +151,8 @@
 		6240933E73D9166ED25F7A50 /* Pods-final-project.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-final-project.release.xcconfig"; path = "Pods/Target Support Files/Pods-final-project/Pods-final-project.release.xcconfig"; sourceTree = "<group>"; };
 		6F7CB94AAC1B57B858BB0386 /* Pods_final_project.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_final_project.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F21D58DFD4535DD00535CFC /* Pods-final-project.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-final-project.debug.xcconfig"; path = "Pods/Target Support Files/Pods-final-project/Pods-final-project.debug.xcconfig"; sourceTree = "<group>"; };
+		C83D20BE205A45F20051E378 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
+		C883BA14205A32480036EF0A /* Splash.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Splash.storyboard; sourceTree = "<group>"; };
 		C892A2F3203A82A5000807D6 /* final-project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "final-project.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C892A2F6203A82A5000807D6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C892A2FA203A82A5000807D6 /* NewPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPostViewController.swift; sourceTree = "<group>"; };
@@ -505,6 +509,8 @@
 				513547D6204CAEB5003BEC7F /* MapAnnotation.swift */,
 				513547D2204CAEB4003BEC7F /* MockData.swift */,
 				C8A8C8FD2055FC4300046D03 /* SharedNetworking.swift */,
+				C83D20BE205A45F20051E378 /* SplashViewController.swift */,
+				C883BA14205A32480036EF0A /* Splash.storyboard */,
 				C892A301203A82A5000807D6 /* LaunchScreen.storyboard */,
 				C892A2FC203A82A5000807D6 /* Main.storyboard */,
 				C892A2FF203A82A5000807D6 /* Assets.xcassets */,
@@ -580,6 +586,7 @@
 				C892A300203A82A5000807D6 /* Assets.xcassets in Resources */,
 				513547DD204CB173003BEC7F /* README.md in Resources */,
 				C892A2FE203A82A5000807D6 /* Main.storyboard in Resources */,
+				C883BA15205A32480036EF0A /* Splash.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -655,6 +662,7 @@
 				51E4C1EC2055BE1C00A2FEA5 /* SegmentedControl.swift in Sources */,
 				51E4C1BD2055BE1B00A2FEA5 /* UIImageView+Extensions.swift in Sources */,
 				C892A31B2045CE07000807D6 /* LoginViewController.swift in Sources */,
+				C83D20BF205A45F20051E378 /* SplashViewController.swift in Sources */,
 				51E4C1E12055BE1C00A2FEA5 /* Contact.swift in Sources */,
 				513547DB204CAEB5003BEC7F /* MapAnnotation.swift in Sources */,
 				51E4C1C82055BE1C00A2FEA5 /* Optional+Extensions.swift in Sources */,

@@ -13,9 +13,11 @@ import FBSDKLoginKit
 class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegate {
 
     var window: UIWindow?
+    var launchFromTerminated = false
     
     // MARK: Facebook SDK
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        self.launchFromTerminated = true
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
     }
     
@@ -41,16 +43,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
 
     // MARK: Lifecycle
     func applicationDidEnterBackground(_ application: UIApplication) {
-        // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-        // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+        
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
-        // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
+        if launchFromTerminated == false {
+            showSplashScreen(autoDismiss: false)
+        }
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
-        // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        if launchFromTerminated {
+            showSplashScreen(autoDismiss: false)
+            launchFromTerminated = false
+        }
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
@@ -59,4 +65,40 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
 
 
 }
+
+extension AppDelegate {
+    
+    /// Load the SplashViewController from Splash.storyboard
+    func showSplashScreen(autoDismiss: Bool) {
+        let storyboard = UIStoryboard(name: "Splash", bundle: nil)
+        let controller = storyboard.instantiateViewController(withIdentifier: "SplashViewController") as! SplashViewController
+        
+        // Control the behavior from suspended to launch
+        controller.autoDismiss = autoDismiss
+        
+        // Present the view controller over the top view controller
+        let vc = topController()
+        vc.present(controller, animated: false, completion: nil)
+    }
+    
+    
+    /// Determine the top view controller on the screen
+    /// - Returns: UIViewController
+    func topController(_ parent:UIViewController? = nil) -> UIViewController {
+        if let vc = parent {
+            if let tab = vc as? UITabBarController, let selected = tab.selectedViewController {
+                return topController(selected)
+            } else if let nav = vc as? UINavigationController, let top = nav.topViewController {
+                return topController(top)
+            } else if let presented = vc.presentedViewController {
+                return topController(presented)
+            } else {
+                return vc
+            }
+        } else {
+            return topController(UIApplication.shared.keyWindow!.rootViewController!)
+        }
+    }
+}
+
 
