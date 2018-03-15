@@ -26,3 +26,6 @@ https://ec2-34-211-177-131.us-west-2.compute.amazonaws.com:8443/api/items
 
 # Third-Party Frameworks
 1. Facebook Login SDK
+
+# Attribution
+- Icon made by https://www.flaticon.com/authors/freepik from www.flaticon.com
