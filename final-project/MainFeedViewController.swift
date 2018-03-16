@@ -24,8 +24,8 @@ class MainFeedViewController: UIViewController {
         self.tabBarController?.delegate = UIApplication.shared.delegate as? UITabBarControllerDelegate
         self.mainFeedTableView.delegate = self
         self.mainFeedTableView.dataSource = self
-        self.mainFeedTableView.estimatedRowHeight = 300
-        self.mainFeedTableView.rowHeight = UITableViewAutomaticDimension
+//        self.mainFeedTableView.estimatedRowHeight = 300
+//        self.mainFeedTableView.rowHeight = UITableViewAutomaticDimension
 
         // Update firebase login
         if let token = FBSDKAccessToken.current() {
@@ -46,7 +46,15 @@ class MainFeedViewController: UIViewController {
         //        self.posts = MockData.sharedInstance.getAllPost()
         SharedNetworking.shared.getFeed() { posts in
             self.posts = posts
-            self.mainFeedTableView?.reloadData()
+            
+            // add mock data
+            self.posts.append(MockData.sharedInstance.getAllPost().postArray)
+
+            DispatchQueue.main.async {
+                // Update any views with the newly downloaded news data
+                UIApplication.shared.isNetworkActivityIndicatorVisible = false
+                self.mainFeedTableView?.reloadData()
+            }
         }
         //        getMainFeed(url: WebService.mainFeed.rawValue)
     }
@@ -59,6 +67,9 @@ class MainFeedViewController: UIViewController {
                 let controller = segue.destination as! PostDetailViewController
                 controller.titleText = currentPost.title
                 controller.itemDescription = currentPost.description
+                controller.longitude = currentPost.longitude
+                controller.latitude = currentPost.latitude
+                controller.date = currentPost.eventTime?.dateTimeString()
 //                controller.itemImage = MockData.sharedInstance.getItemImage(url: (currentPost?.imgURL)!)
 //                controller.address = currentPost?.pickupAddress
 //                controller.date = currentPost?.date
@@ -151,11 +162,18 @@ extension MainFeedViewController: UITableViewDataSource {
 //        cell.userImage.image = MockData.sharedInstance.getUserImage(url: URL(string: "123")!)
 //        cell.userName.text = currentPost?.user.userName
         
+        // line between table rows
         cell.preservesSuperviewLayoutMargins = false
         cell.separatorInset = UIEdgeInsets.zero
         cell.layoutMargins = UIEdgeInsets.zero
         
         return cell
+    }
+    
+    // Set fix row height
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
+    {
+        return 300.0
     }
 }
 

@@ -67,3 +67,26 @@ struct User: Codable {
     var facebookId: Int
     var userName: String
 }
+
+struct MessageOverview: Codable {
+    var messageOverViewArray: [SingleMessageOverview]
+}
+
+struct SingleMessageOverview: Codable {
+    var id: Int
+    var shortMessage: String
+    var dateTime: String
+    var user: User
+}
+
+struct Message: Codable {
+    var messageDetailArray: [SingleMessageDetail]
+}
+
+struct SingleMessageDetail: Codable {
+    var id: Int
+    var message: String
+    var dateTime: String
+    var user1: User
+    var user2: User
+}

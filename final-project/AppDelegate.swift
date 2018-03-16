@@ -54,9 +54,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
-        if launchFromTerminated == false {
-            showSplashScreen(autoDismiss: false)
-        }
+        // Mark first, as it will have conflict with facebook login
+//        if launchFromTerminated == false {
+//            showSplashScreen(autoDismiss: false)
+//        }
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {

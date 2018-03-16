@@ -64,6 +64,28 @@ class MockData {
         
         return userImage!
     }
+    
+    func getMessageOverview() -> MessageOverview {
+        var messageOverview: MessageOverview? = nil
+        do {
+            let decoder = JSONDecoder()
+            messageOverview = try decoder.decode(MessageOverview.self, from: (messageOverviewJsonString?.data(using: String.Encoding.utf8.rawValue))!)
+        } catch {
+            print("Error serializing/decoding JSON: \(error)")
+        }
+        return messageOverview!
+    }
+    
+    func getMessageDetail(user1Id: Int, user2Id: Int) -> Message {
+        var message: Message? = nil
+        do {
+            let decoder = JSONDecoder()
+            message = try decoder.decode(Message.self, from: (messageJsonString?.data(using: String.Encoding.utf8.rawValue))!)
+        } catch {
+            print("Error serializing/decoding JSON: \(error)")
+        }
+        return message!
+    }
 }
 
 var mockDictionary = [
@@ -84,8 +106,8 @@ var mockDictionary = [
                 "facebookId": 123,
                 "userName": "AChiu"
             ],
-            "longitude": 1,
-            "latitude": 1
+            "longitude": -88,
+            "latitude": 42
         ],
         [
             "id": 2,
@@ -103,8 +125,8 @@ var mockDictionary = [
                 "facebookId": 123,
                 "userName": "AChiu"
             ],
-            "longitude": 1,
-            "latitude": 1
+            "longitude": -89,
+            "latitude": 41
         ],
         [
             "id": 3,
@@ -122,8 +144,8 @@ var mockDictionary = [
                 "facebookId": 123,
                 "userName": "AChiu"
             ],
-            "longitude": 1,
-            "latitude": 1
+            "longitude": -100,
+            "latitude": 40
         ],
         [
             "id": 4,
@@ -141,11 +163,127 @@ var mockDictionary = [
                 "facebookId": 123,
                 "userName": "AChiu"
             ],
-            "longitude": 1,
-            "latitude": 1
+            "longitude": -80,
+            "latitude": 40
         ]
     ]
 ]
 
 let jsonData = try! JSONSerialization.data(withJSONObject: mockDictionary)
 let jsonString = NSString(data: jsonData, encoding: String.Encoding.utf8.rawValue)
+
+var messageOverViewDictionary = [
+    "messageOverViewArray": [
+        [
+            "id": 0,
+            "shortMessage": "What do you wanna tell me?",
+            "dateTime": "2018-03-15 14:01",
+            "user": [
+                "id": 2,
+                "address": "somewhere",
+                "description": "description",
+                "email": "String",
+                "facebookId": 123,
+                "userName": "JLo"
+            ]
+        ],
+        [
+            "id": 1,
+            "shortMessage": "May I have that hamburger?",
+            "dateTime": "2018-03-16 19:20",
+            "user": [
+                "id": 3,
+                "address": "somewhere",
+                "description": "description",
+                "email": "String",
+                "facebookId": 123,
+                "userName": "PHuarng"
+            ]
+        ],
+        [
+            "id": 2,
+            "shortMessage": "GREAT APP!",
+            "dateTime": "2018-03-16 08:55",
+            "user": [
+                "id": 4,
+                "address": "somewhere",
+                "description": "description",
+                "email": "String",
+                "facebookId": 123,
+                "userName": "JChen"
+            ]
+        ]
+    ]
+]
+let messageOverviewJsonData = try! JSONSerialization.data(withJSONObject: messageOverViewDictionary)
+let messageOverviewJsonString = NSString(data: messageOverviewJsonData, encoding: String.Encoding.utf8.rawValue)
+
+var messageDictionary = [
+    "messageDetailArray": [
+        [
+            "id": 0,
+            "message": " Hey you here me? Let's try a long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long message",
+            "dateTime": "2018-03-16T14:00:56.897Z",
+            "user1": [
+                "id": 1,
+                "address": "somewhere",
+                "description": "description",
+                "email": "String",
+                "facebookId": 123,
+                "userName": "AChiu"
+            ],
+            "user2": [
+                "id": 2,
+                "address": "somewhere",
+                "description": "description",
+                "email": "String",
+                "facebookId": 123,
+                "userName": "JLo"
+            ]
+        ],
+        [
+            "id": 2,
+            "message": "Yes I do!!! Very CooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooL!",
+            "dateTime": "2018-03-16T14:00:56.897Z",
+            "user1": [
+                "id": 1,
+                "address": "somewhere",
+                "description": "description",
+                "email": "String",
+                "facebookId": 123,
+                "userName": "AChiu"
+            ],
+            "user2": [
+                "id": 2,
+                "address": "somewhere",
+                "description": "description",
+                "email": "String",
+                "facebookId": 123,
+                "userName": "JLo"
+            ]
+        ],
+        [
+            "id": 3,
+            "message": "Glad you like it :)",
+            "dateTime": "2018-03-16T14:00:56.897Z",
+            "user1": [
+                "id": 1,
+                "address": "somewhere",
+                "description": "description",
+                "email": "String",
+                "facebookId": 123,
+                "userName": "AChiu"
+            ],
+            "user2": [
+                "id": 2,
+                "address": "somewhere",
+                "description": "description",
+                "email": "String",
+                "facebookId": 123,
+                "userName": "JLo"
+            ]
+        ]
+    ]
+]
+let messageJsonData = try! JSONSerialization.data(withJSONObject: messageDictionary)
+let messageJsonString = NSString(data: messageJsonData, encoding: String.Encoding.utf8.rawValue)
