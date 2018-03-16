@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import FBSDKLoginKit
+import FirebaseAuth
 
 class MainFeedViewController: UIViewController {
     // MARK: properties
@@ -31,7 +33,18 @@ class MainFeedViewController: UIViewController {
         self.mainFeedTableView.dataSource = self
         self.mainFeedTableView.estimatedRowHeight = 300
         self.mainFeedTableView.rowHeight = UITableViewAutomaticDimension
-        
+
+        // Update firebase login
+        if let token = FBSDKAccessToken.current() {
+            let credential = FacebookAuthProvider.credential(withAccessToken: token.tokenString)
+            Auth.auth().signIn(with: credential) { (user, error) in
+                if let error = error {
+                    print("not here")
+                    return
+                }
+                SharedNetworking.shared.firebaseID = user!.uid
+            }
+        }
     }
     
     // MARK: Segue
@@ -42,10 +55,10 @@ class MainFeedViewController: UIViewController {
                 let controller = segue.destination as! PostDetailViewController
                 controller.titleText = currentPost?.title
                 controller.itemDescription = currentPost?.description
-                controller.itemImage = MockData.sharedInstance.getItemImage(url: (currentPost?.imgUrl)!)
+                controller.itemImage = MockData.sharedInstance.getItemImage(url: (currentPost?.imgURL)!)
                 controller.address = currentPost?.pickupAddress
-                controller.date = currentPost?.date
-                controller.userName = (currentPost?.user.userName)!
+//                controller.date = currentPost?.date
+//                controller.userName = (currentPost?.user.userName)!
                 controller.userImage = MockData.sharedInstance.getUserImage(url: URL(string: "123")!)
             }
         }
@@ -53,28 +66,28 @@ class MainFeedViewController: UIViewController {
     
     // MARK: private functions
     
-    private func getMainFeed(url: String) {        
-        do {
-            try SharedNetworking.sharedInstance.getMainFeed(url: url) { (posts) in
-                self.posts = posts
-                
-                DispatchQueue.main.async {
-                    // Update any views with the newly downloaded news data
-                    UIApplication.shared.isNetworkActivityIndicatorVisible = false
-                    self.mainFeedTableView?.reloadData()
-                }
-            }
-        } catch NetWorkError.noConnection {
-            if !self.infromedNetworkStatus {
-                self.netWorkErrorAlert(message: "You seem to be offline")
-                self.infromedNetworkStatus = true
-            }
-        } catch NetWorkError.invalidURL {
-            self.netWorkErrorAlert(message: "There's an error in URL")
-        } catch {
-            print(Error.self)
-        }
-    }
+//    private func getMainFeed(url: String) {
+//        do {
+//            try SharedNetworking.shared.getMainFeed(url: url) { (posts) in
+//                self.posts = posts
+//
+//                DispatchQueue.main.async {
+//                    // Update any views with the newly downloaded news data
+//                    UIApplication.shared.isNetworkActivityIndicatorVisible = false
+//                    self.mainFeedTableView?.reloadData()
+//                }
+//            }
+//        } catch NetWorkError.noConnection {
+//            if !self.infromedNetworkStatus {
+//                self.netWorkErrorAlert(message: "You seem to be offline")
+//                self.infromedNetworkStatus = true
+//            }
+//        } catch NetWorkError.invalidURL {
+//            self.netWorkErrorAlert(message: "There's an error in URL")
+//        } catch {
+//            print(Error.self)
+//        }
+//    }
     
     private func netWorkErrorAlert(message: String) {
         let alert = UIAlertController(title: "Oops!", message: message , preferredStyle: .alert)
@@ -130,11 +143,11 @@ extension MainFeedViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "mainFeedCell", for: indexPath) as! MainFeedTableViewCell
         
         let currentPost = posts?.postArray[indexPath.row]
-        cell.titleLabel.text = currentPost?.title
-        let tempImage = MockData.sharedInstance.getItemImage(url: (currentPost?.imgUrl)!)
-        cell.itemImage.image = resizeImage(image: tempImage, targetSize: CGSize.init(width: self.mainFeedTableView.width-100, height: self.mainFeedTableView.width-100))
-        cell.userImage.image = MockData.sharedInstance.getUserImage(url: URL(string: "123")!)
-        cell.userName.text = currentPost?.user.userName
+//        cell.titleLabel.text = currentPost?.title
+//        let tempImage = MockData.sharedInstance.getItemImage(url: (currentPost?.imgURL)!)
+//        cell.itemImage.image = resizeImage(image: tempImage, targetSize: CGSize.init(width: self.mainFeedTableView.width-100, height: self.mainFeedTableView.width-100))
+//        cell.userImage.image = MockData.sharedInstance.getUserImage(url: URL(string: "123")!)
+//        cell.userName.text = currentPost?.user.userName
         
         cell.preservesSuperviewLayoutMargins = false
         cell.separatorInset = UIEdgeInsets.zero

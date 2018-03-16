@@ -8,5 +8,9 @@ target 'final-project' do
   # Pods for final-project
   pod 'FacebookCore'
   pod 'FacebookLogin'
+  pod 'Firebase/Core'
+  pod 'Firebase/Storage'
+  pod 'Firebase/Database'
+  pod 'FirebaseUI/Auth'
 
 end

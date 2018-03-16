@@ -8,6 +8,7 @@
 
 import UIKit
 import FBSDKLoginKit
+import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegate {
@@ -15,10 +16,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
     var window: UIWindow?
     var launchFromTerminated = false
     
-    // MARK: Facebook SDK
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         self.launchFromTerminated = true
         registerSettingsBundle()
+        
+        // Firebase setup
+        FirebaseApp.configure()
+        
+        // Facebook setup
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
     }
     
@@ -30,8 +35,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
         return FBSDKApplicationDelegate.sharedInstance().application(application, open: url, sourceApplication: sourceApplication, annotation: annotation)
     }
     
-    // NewPostViewController modal presentation
+
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
+        // NewPostViewController modal presentation
         if viewController.restorationIdentifier == "NewPostNavigationController" {
             if let newVC = tabBarController.storyboard?.instantiateViewController(withIdentifier: "NewPostNavigationController") as? UINavigationController {
                 newVC.modalPresentationStyle = .overFullScreen

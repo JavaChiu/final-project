@@ -459,6 +459,7 @@
                         <outlet property="mapView" destination="0hg-wY-BQt" id="bjH-x9-9WA"/>
                         <outlet property="photoImageView" destination="ibU-RN-cVu" id="2lC-VV-zZg"/>
                         <outlet property="timeLabel" destination="0Rk-XW-UoA" id="nSz-uC-2Kz"/>
+                        <outlet property="titleLabel" destination="yt3-55-V5H" id="xRq-4D-j5p"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NxP-wc-h7b" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -83,7 +83,9 @@ var mockDictionary = [
                 "email": "String",
                 "facebookId": 123,
                 "userName": "AChiu"
-            ]
+            ],
+            "longitude": 1,
+            "latitude": 1
         ],
         [
             "id": 2,
@@ -100,7 +102,9 @@ var mockDictionary = [
                 "email": "String",
                 "facebookId": 123,
                 "userName": "AChiu"
-            ]
+            ],
+            "longitude": 1,
+            "latitude": 1
         ],
         [
             "id": 3,
@@ -117,7 +121,9 @@ var mockDictionary = [
                 "email": "String",
                 "facebookId": 123,
                 "userName": "AChiu"
-            ]
+            ],
+            "longitude": 1,
+            "latitude": 1
         ],
         [
             "id": 4,
@@ -134,7 +140,9 @@ var mockDictionary = [
                 "email": "String",
                 "facebookId": 123,
                 "userName": "AChiu"
-            ]
+            ],
+            "longitude": 1,
+            "latitude": 1
         ]
     ]
 ]

@@ -1,6 +1,6 @@
 //
 //  NewPostViewControllerExtension.swift
-//  
+//
 //
 //  Created by Jerry Lo on 2/25/18.
 //
@@ -12,7 +12,7 @@ import MapKit
 
 extension NewPostViewController: UITextViewDelegate, UITextFieldDelegate, CLLocationManagerDelegate {
     // MARK: Gesture Recognizers
-
+    
     /// Add tap gestures to a view
     /// - Parameter view: The view to attach the gestures to
     func addPanGesturesToView(_ view: UIView) {
@@ -35,7 +35,7 @@ extension NewPostViewController: UITextViewDelegate, UITextFieldDelegate, CLLoca
             }
         }
     }
-
+    
     // MARK: UITextView Delegate Methods
     func textViewDidBeginEditing(_ textView: UITextView) {
         if textView.textColor == UIColor.lightGray {

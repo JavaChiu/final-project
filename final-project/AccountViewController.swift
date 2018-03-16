@@ -10,9 +10,13 @@
 import UIKit
 import FacebookLogin
 import FBSDKLoginKit
+import FirebaseAuth
 
 class AccountViewController: UIViewController {
+    // MARK: Properties
     var dict : [String : AnyObject]!
+    
+    // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -25,11 +29,8 @@ class AccountViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        // Attribution: https://stackoverflow.com/questions/11862883/attempt-to-present-uiviewcontroller-on-uiviewcontroller-whose-view-is-not-in-the
         if (FBSDKAccessToken.current()) != nil{
-//            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-//            let nextViewController = storyBoard.instantiateViewController(withIdentifier: "MainTabView") as! UITabBarController
-//            self.present(nextViewController, animated:true, completion:nil)
+            // do stuff
         }
     }
     
@@ -51,13 +52,18 @@ extension AccountViewController: LoginButtonDelegate {
     func loginButtonDidCompleteLogin(_ loginButton: LoginButton, result: LoginResult) {
         print("logged in")
         self.getFBUserData()
+        let credential = FacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
+        Auth.auth().signIn(with: credential) { (user, error) in
+            if let error = error {
+                // ...
+                return
+            }
+            SharedNetworking.shared.firebaseID = user!.uid
+        }
     }
     
     func loginButtonDidLogOut(_ loginButton: LoginButton) {
         print("logged out")
-        
-//        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-//        let nextViewController = storyBoard.instantiateViewController(withIdentifier: "LoginViewController")
-//        self.present(nextViewController, animated:true, completion:nil)
+        SharedNetworking.shared.firebaseID = nil
     }
 }

@@ -17,6 +17,9 @@
 		513547DD204CB173003BEC7F /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 513547DC204CB173003BEC7F /* README.md */; };
 		5149A3552055DCB200009D39 /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5149A3542055DCB200009D39 /* UIViewControllerExtension.swift */; };
 		517728F2204FB28700AE0CBE /* MediaManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 517728F1204FB28600AE0CBE /* MediaManager.swift */; };
+		51CF268C205B0B7000CDECBB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 51CF268B205B0B7000CDECBB /* GoogleService-Info.plist */; };
+		51CF268E205B0BC200CDECBB /* ErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51CF268D205B0BC200CDECBB /* ErrorHandler.swift */; };
+		51CF2690205B0BDF00CDECBB /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51CF268F205B0BDF00CDECBB /* UIImageExtension.swift */; };
 		51E4C1BB2055BE1B00A2FEA5 /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E4C16C2055BE1B00A2FEA5 /* Array+Extensions.swift */; };
 		51E4C1BC2055BE1B00A2FEA5 /* UISegmentedControl+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E4C16D2055BE1B00A2FEA5 /* UISegmentedControl+Extensions.swift */; };
 		51E4C1BD2055BE1B00A2FEA5 /* UIImageView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E4C16E2055BE1B00A2FEA5 /* UIImageView+Extensions.swift */; };
@@ -96,6 +99,9 @@
 		513547DC204CB173003BEC7F /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		5149A3542055DCB200009D39 /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
 		517728F1204FB28600AE0CBE /* MediaManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaManager.swift; sourceTree = "<group>"; };
+		51CF268B205B0B7000CDECBB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		51CF268D205B0BC200CDECBB /* ErrorHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorHandler.swift; sourceTree = "<group>"; };
+		51CF268F205B0BDF00CDECBB /* UIImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
 		51E4C16C2055BE1B00A2FEA5 /* Array+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Extensions.swift"; sourceTree = "<group>"; };
 		51E4C16D2055BE1B00A2FEA5 /* UISegmentedControl+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UISegmentedControl+Extensions.swift"; sourceTree = "<group>"; };
 		51E4C16E2055BE1B00A2FEA5 /* UIImageView+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extensions.swift"; sourceTree = "<group>"; };
@@ -499,11 +505,13 @@
 				51E4C16A2055BE1B00A2FEA5 /* Source */,
 				C892A2F6203A82A5000807D6 /* AppDelegate.swift */,
 				C892A31C20470B8F000807D6 /* AccountViewController.swift */,
-				C8A8C8FF2055FCF700046D03 /* Enums.swift */,
 				513547D0204CAEA3003BEC7F /* DataTypes.swift */,
+				C8A8C8FF2055FCF700046D03 /* Enums.swift */,
+				51CF268D205B0BC200CDECBB /* ErrorHandler.swift */,
 				517728F1204FB28600AE0CBE /* MediaManager.swift */,
 				C892A2FA203A82A5000807D6 /* NewPostViewController.swift */,
 				5124639720549B8500126A2E /* NewPostViewControllerExtension.swift */,
+				51CF268F205B0BDF00CDECBB /* UIImageExtension.swift */,
 				5149A3542055DCB200009D39 /* UIViewControllerExtension.swift */,
 				513547D3204CAEB5003BEC7F /* PostDetailViewController.swift */,
 				C892A31A2045CE07000807D6 /* LoginViewController.swift */,
@@ -518,6 +526,7 @@
 				C892A2FC203A82A5000807D6 /* Main.storyboard */,
 				C892A2FF203A82A5000807D6 /* Assets.xcassets */,
 				C892A304203A82A5000807D6 /* Info.plist */,
+				51CF268B205B0B7000CDECBB /* GoogleService-Info.plist */,
 			);
 			path = "final-project";
 			sourceTree = "<group>";
@@ -585,6 +594,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C892A303203A82A5000807D6 /* LaunchScreen.storyboard in Resources */,
+				51CF268C205B0B7000CDECBB /* GoogleService-Info.plist in Resources */,
 				51E4C1CE2055BE1C00A2FEA5 /* Countries.bundle in Resources */,
 				C892A300203A82A5000807D6 /* Assets.xcassets in Resources */,
 				513547DD204CB173003BEC7F /* README.md in Resources */,
@@ -621,9 +631,12 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-final-project/Pods-final-project-resources.sh",
+				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseUI/FirebaseAuthUI.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FirebaseAuthUI.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -642,6 +655,10 @@
 				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FacebookCore/FacebookCore.framework",
 				"${BUILT_PRODUCTS_DIR}/FacebookLogin/FacebookLogin.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -650,6 +667,10 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FacebookCore.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FacebookLogin.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -686,6 +707,7 @@
 				C8A8C8FE2055FC4300046D03 /* SharedNetworking.swift in Sources */,
 				513547D7204CAEB5003BEC7F /* MockData.swift in Sources */,
 				51E4C1BF2055BE1B00A2FEA5 /* UIView+Extensions.swift in Sources */,
+				51CF2690205B0BDF00CDECBB /* UIImageExtension.swift in Sources */,
 				51E4C1E22055BE1C00A2FEA5 /* ContactCell.swift in Sources */,
 				5149A3552055DCB200009D39 /* UIViewControllerExtension.swift in Sources */,
 				51E4C1DD2055BE1C00A2FEA5 /* Address.swift in Sources */,
@@ -696,6 +718,7 @@
 				5124639820549B8500126A2E /* NewPostViewControllerExtension.swift in Sources */,
 				51E4C1E82055BE1C00A2FEA5 /* TelegramPickerViewController.swift in Sources */,
 				51E4C1D92055BE1C00A2FEA5 /* LocationSearchResultsViewController.swift in Sources */,
+				51CF268E205B0BC200CDECBB /* ErrorHandler.swift in Sources */,
 				51E4C1E62055BE1C00A2FEA5 /* ItemWithImage.swift in Sources */,
 				51E4C1DB2055BE1C00A2FEA5 /* SearchHistoryManager.swift in Sources */,
 				51E4C1D72055BE1C00A2FEA5 /* Assets.swift in Sources */,
@@ -870,14 +893,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 6P5VY86NKN;
+				DEVELOPMENT_TEAM = 7Y5XC2DHC7;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/final-project",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/final-project/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "uchicago.mobi.final-project";
+				PRODUCT_BUNDLE_IDENTIFIER = "uchicago.mobi.final-project1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
@@ -892,14 +915,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 6P5VY86NKN;
+				DEVELOPMENT_TEAM = 7Y5XC2DHC7;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/final-project",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/final-project/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "uchicago.mobi.final-project";
+				PRODUCT_BUNDLE_IDENTIFIER = "uchicago.mobi.final-project1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
