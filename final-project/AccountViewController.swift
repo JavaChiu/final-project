@@ -16,16 +16,26 @@ class AccountViewController: UIViewController {
     // MARK: Properties
     var dict : [String : AnyObject]!
     
+    // MARK: Outlets
+    @IBOutlet weak var userNameField: UITextField!
+    @IBOutlet weak var emailField: UITextField!
+    @IBOutlet weak var addressField: UITextField!
+
+    // MARK: Actions
+    @IBAction func editPressed(_ sender: Any) {
+    }
+    
+    
     // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
         let loginButton = LoginButton(readPermissions: [ .publicProfile ])
-        loginButton.center = view.center
+        let center = CGPoint.init(x: self.view.frame.width/2, y: self.view.frame.height-100)
+        loginButton.center = center
         loginButton.delegate = self
-        
         view.addSubview(loginButton)
-    }    
+    }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
