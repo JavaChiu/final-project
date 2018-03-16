@@ -900,7 +900,7 @@
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/final-project/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "uchicago.mobi.final-project1";
+				PRODUCT_BUNDLE_IDENTIFIER = "uchicago.mobi.final-project";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
@@ -922,7 +922,7 @@
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/final-project/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "uchicago.mobi.final-project1";
+				PRODUCT_BUNDLE_IDENTIFIER = "uchicago.mobi.final-project";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
