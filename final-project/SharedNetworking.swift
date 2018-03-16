@@ -6,11 +6,13 @@
 //  Copyright © 2018 Andrew Chiu. All rights reserved.
 //
 
-import Foundation
-import UIKit
+import CodableFirebase
+import Firebase
 import FirebaseStorage
 import FirebaseDatabase
+import Foundation
 import SystemConfiguration
+import UIKit
 
 class SharedNetworking {
     // Static class variable
@@ -27,6 +29,7 @@ class SharedNetworking {
     let cache = NSCache<AnyObject, AnyObject>()
     
     // Firebase storage and database root reference
+    let storage = Storage.storage()
     let storageRef = Storage.storage().reference()
     var dbRef = Database.database().reference()
     
@@ -64,11 +67,12 @@ class SharedNetworking {
             ErrorHandler.showError(for: SharedNetworkingError.userNotLogined)
             return
         }
-        
+        // Create encoded upload
+        let data = try! FirebaseEncoder().encode(post)
         // Create key for both public and personal feed
         let key = dbRef.child("posts").childByAutoId().key
-        let update = ["/posts/\(key)/": post.dict,
-                      "/users/\(firebaseID)/\(key)/": post.dict]
+        let update = ["/posts/\(key)/": data,
+                      "/users/\(firebaseID)/\(key)/": data]
         dbRef.updateChildValues(update) { (error, ref) in
             if let error = error {
                 ErrorHandler.showError(for: error)
@@ -76,92 +80,71 @@ class SharedNetworking {
         }
     }
 
-    // Get Image from server
-    //    func getFeed(from vc: UIViewController, completion:@escaping (([ImageData]?) -> Void)) {
-    //        UIApplication.shared.isNetworkActivityIndicatorVisible = true
-    //        guard let url = URL(string: StorageAPI.feed.rawValue) else {
-    //            ErrorHandler.showError(for: SharedNetworkingError.invalidURL)
-    //            return
-    //        }
-    //
-    //        // Create a url session
-    //        let session = URLSession.shared
-    //        // Create a data task
-    //        session.dataTask(with: url as URL) {(data, response, error) -> Void in
-    //            DispatchQueue.main.async {
-    //                UIApplication.shared.isNetworkActivityIndicatorVisible = false
-    //            }
-    //            // Ensure there were no errors returned from the request
-    //            guard error == nil else {
-    //                ErrorHandler.showErrorAsync(for: error!)
-    //                completion(nil)
-    //                return
-    //            }
-    //
-    //            // Ensure there is data and unwrap it
-    //            guard let data = data else {
-    //                ErrorHandler.showErrorAsync(for: SharedNetworkingError.noDataReceived)
-    //                completion(nil)
-    //                return
-    //            }
-    //
-    //            // Save feed data to Document folder
-    //            let docs = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
-    //            NSKeyedArchiver.archiveRootObject(data, toFile: docs.appending("/feed.plist"))
-    //
-    //            // Covert JSON to `Feed` type using `JSONDecoder` and `Codable` protocol
-    //            do {
-    //                let decoder = JSONDecoder()
-    //                let feed = try decoder.decode(Feed.self, from: data)
-    //
-    //                // Call the completion block closure
-    //                completion(feed.results)
-    //            } catch {
-    //                ErrorHandler.showErrorAsync(for: SharedNetworkingError.invalidJSON)
-    //                completion(nil)
-    //            }
-    //        }.resume()
-    //    }
-    //
+    // Get Feed from server
+    func getFeed(completion:@escaping (([SinglePost]) -> Void)) {
+        let feedRef = dbRef.child("posts")
+        feedRef.observe(.value) { snapshot in
+            print("Getting feed...")
+            if let data = snapshot.value as? [String: [String: Any]] {
+                do {
+                    let posts = try FirebaseDecoder().decode([SinglePost].self, from: Array(data.values))
+                    completion(posts)
+                } catch {
+                    ErrorHandler.showError(for: error)
+                }
+            } else { ErrorHandler.showError(for: SharedNetworkingError.invalidFirebaseDBData)}
+        }
+    }
     
+    // Get my posts from server
+    func getMyPosts(completion:@escaping (([SinglePost]) -> Void)) {
+        // Check if user is logged in
+        guard let firebaseID = firebaseID else {
+            ErrorHandler.showError(for: SharedNetworkingError.userNotLogined)
+            return
+        }
+        let feedRef = dbRef.child("users\(firebaseID)")
+        feedRef.observe(.value) { snapshot in
+            print("Getting my posts...")
+            if let data = snapshot.value as? [String: [String: Any]] {
+                do {
+                    let posts = try FirebaseDecoder().decode([SinglePost].self, from: Array(data.values))
+                    completion(posts)
+                } catch {
+                    ErrorHandler.showError(for: error)
+                }
+            } else { ErrorHandler.showError(for: SharedNetworkingError.invalidFirebaseDBData)}
+        }
+    }
     
-    //    /// Get Image from imageURL
-    //    func getImage(from vc: UIViewController, urlString: String, completion:@escaping ((UIImage?) -> Void)) {
-    //        UIApplication.shared.isNetworkActivityIndicatorVisible = true
-    //
-    //        guard let url = URL(string: StorageAPI.base.rawValue+urlString) else {
-    //            ErrorHandler.showError(for: SharedNetworkingError.invalidURL)
-    //            return
-    //        }
-    //        if let image = cache.object(forKey: urlString as AnyObject) {
-    //            completion(image as? UIImage)
-    //        } else {
-    //            URLSession.shared.dataTask(with: url) {(data, response, error) -> Void in
-    //                DispatchQueue.main.async {
-    //                    UIApplication.shared.isNetworkActivityIndicatorVisible = false
-    //                }
-    //                // Ensure there were no errors returned from the request
-    //                guard error == nil else {
-    //                    ErrorHandler.showErrorAsync(for: error!)
-    //                    return
-    //                }
-    //
-    //                // Ensure there is data and unwrap it
-    //                guard let data = data else {
-    //                    ErrorHandler.showErrorAsync(for: SharedNetworkingError.noDataReceived)
-    //                    return
-    //                }
-    //
-    //                // Return the UIImage
-    //                if let image = UIImage(data: data) {
-    //                    self.cache.setObject(image, forKey: urlString as AnyObject)
-    //                    completion(image)
-    //                } else {
-    //                    ErrorHandler.showErrorAsync(for: SharedNetworkingError.invalidImageData)
-    //                }
-    //            }.resume()
-    //        }
-    //    }
+    // Get image from url
+    func getImage(urlString: String, completion:@escaping ((UIImage?) -> Void)) {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+
+        guard let url = URL(string: urlString) else {
+            ErrorHandler.showError(for: SharedNetworkingError.invalidURL)
+            return
+        }
+        if let image = cache.object(forKey: urlString as AnyObject) {
+            print("Found image in cache")
+            completion(image as? UIImage)
+        } else {
+            let imageRef = storage.reference(forURL: "https://firebasestorage.googleapis.com/b/bucket/o/images%20stars.jpg")
+            
+            // Download in memory with a maximum allowed size of 1MB (1 * 1024 * 1024 bytes)
+            imageRef.getData(maxSize: 1 * 1024 * 1024) { data, error in                DispatchQueue.main.async {
+                    UIApplication.shared.isNetworkActivityIndicatorVisible = false
+                }
+                if let error = error {
+                    ErrorHandler.showErrorAsync(for: error)
+                    return
+                } else {
+                    let image = UIImage(data: data!)
+                    completion(image)
+                }
+            }
+        }
+    }
     
     
     // Attribution: https://stackoverflow.com/questions/25623272/how-to-use-scnetworkreachability-in-swift

@@ -12,5 +12,5 @@ target 'final-project' do
   pod 'Firebase/Storage'
   pod 'Firebase/Database'
   pod 'FirebaseUI/Auth'
-
+  pod 'CodableFirebase'
 end

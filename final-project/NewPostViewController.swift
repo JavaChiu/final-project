@@ -196,4 +196,3 @@ class NewPostViewController: UIViewController {
         self.coordinate = location.coordinate
     }
 }
-

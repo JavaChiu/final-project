@@ -11,21 +11,14 @@ import FBSDKLoginKit
 import FirebaseAuth
 
 class MainFeedViewController: UIViewController {
-    // MARK: properties
-    var posts: Posts?
+    // MARK: Properties
+    var posts = [SinglePost]()
     var infromedNetworkStatus: Bool = false
     
-    // MARK: outlet
+    // MARK: Outlet and Actions
     @IBOutlet weak var mainFeedTableView: UITableView!
     
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        self.posts = MockData.sharedInstance.getAllPost()
-//        getMainFeed(url: WebService.mainFeed.rawValue)
-    }
-    
+    // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tabBarController?.delegate = UIApplication.shared.delegate as? UITabBarControllerDelegate
@@ -39,7 +32,7 @@ class MainFeedViewController: UIViewController {
             let credential = FacebookAuthProvider.credential(withAccessToken: token.tokenString)
             Auth.auth().signIn(with: credential) { (user, error) in
                 if let error = error {
-                    print("not here")
+                    ErrorHandler.showError(for: error)
                     return
                 }
                 SharedNetworking.shared.firebaseID = user!.uid
@@ -47,19 +40,30 @@ class MainFeedViewController: UIViewController {
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        //        self.posts = MockData.sharedInstance.getAllPost()
+        SharedNetworking.shared.getFeed() { posts in
+            self.posts = posts
+            self.mainFeedTableView?.reloadData()
+        }
+        //        getMainFeed(url: WebService.mainFeed.rawValue)
+    }
+    
     // MARK: Segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showPostDetail" {
             if let indexPath = self.mainFeedTableView.indexPathForSelectedRow {
-                let currentPost = self.posts?.postArray[indexPath.row]
+                let currentPost = self.posts[indexPath.row]
                 let controller = segue.destination as! PostDetailViewController
-                controller.titleText = currentPost?.title
-                controller.itemDescription = currentPost?.description
-                controller.itemImage = MockData.sharedInstance.getItemImage(url: (currentPost?.imgURL)!)
-                controller.address = currentPost?.pickupAddress
+                controller.titleText = currentPost.title
+                controller.itemDescription = currentPost.description
+//                controller.itemImage = MockData.sharedInstance.getItemImage(url: (currentPost?.imgURL)!)
+//                controller.address = currentPost?.pickupAddress
 //                controller.date = currentPost?.date
 //                controller.userName = (currentPost?.user.userName)!
-                controller.userImage = MockData.sharedInstance.getUserImage(url: URL(string: "123")!)
+//                controller.userImage = MockData.sharedInstance.getUserImage(url: URL(string: "123")!)
             }
         }
     }
@@ -129,21 +133,19 @@ extension MainFeedViewController: UITableViewDelegate {
 }
 
 extension MainFeedViewController: UITableViewDataSource {
-    
-    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return posts?.postArray.count ?? 0
+        return posts.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "mainFeedCell", for: indexPath) as! MainFeedTableViewCell
         
-        let currentPost = posts?.postArray[indexPath.row]
-//        cell.titleLabel.text = currentPost?.title
+        let currentPost = posts[indexPath.row]
+        cell.titleLabel.text = currentPost.title
 //        let tempImage = MockData.sharedInstance.getItemImage(url: (currentPost?.imgURL)!)
 //        cell.itemImage.image = resizeImage(image: tempImage, targetSize: CGSize.init(width: self.mainFeedTableView.width-100, height: self.mainFeedTableView.width-100))
 //        cell.userImage.image = MockData.sharedInstance.getUserImage(url: URL(string: "123")!)
