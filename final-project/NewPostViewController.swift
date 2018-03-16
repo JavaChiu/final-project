@@ -12,7 +12,7 @@ import CoreLocation
 import MapKit
 
 class NewPostViewController: UIViewController {
-    // Properties
+    // MARK: Properties
     let addPhoto = UIImage(named: "add_photo")
     let formatter = DateFormatter()
     let locationManager = CLLocationManager()
@@ -67,7 +67,6 @@ class NewPostViewController: UIViewController {
         alert.addAction(title: "Cancel", style: .cancel)
         present(alert, animated: true)
     }
-    
     
     // Submit Post
     @IBAction func submitPost(_ sender: Any) {
