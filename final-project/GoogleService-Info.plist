@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AD_UNIT_ID_FOR_BANNER_TEST</key>
+	<string>ca-app-pub-3940256099942544/2934735716</string>
+	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
+	<string>ca-app-pub-3940256099942544/4411468910</string>
+	<key>CLIENT_ID</key>
+	<string>376201777191-71p111t6aj739bj0clo18mscvdbhahbo.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.376201777191-71p111t6aj739bj0clo18mscvdbhahbo</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDBC8QELKpqx4I3weoQDhdxfCbymHEDdNA</string>
+	<key>GCM_SENDER_ID</key>
+	<string>376201777191</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>uchicago.mobi.final-project1</string>
+	<key>PROJECT_ID</key>
+	<string>giveaway-ae540</string>
+	<key>STORAGE_BUCKET</key>
+	<string>giveaway-ae540.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<true></true>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<false></false>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:376201777191:ios:6cdea6cc7fbfbb1d</string>
+	<key>DATABASE_URL</key>
+	<string>https://giveaway-ae540.firebaseio.com</string>
+</dict>
+</plist>
