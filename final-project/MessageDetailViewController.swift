@@ -10,26 +10,70 @@ import UIKit
 
 class MessageDetailViewController: UIViewController {
 
+    // MARK: Properties
+    var message: Message?
+    var userId: Int?
+    
+    // MARK: Outletes
+    @IBOutlet weak var messageTableView: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        self.messageTableView.dataSource = self
+        self.messageTableView.delegate = self
+        self.messageTableView.estimatedRowHeight = 200
+        self.messageTableView.rowHeight = UITableViewAutomaticDimension
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if let userId = self.userId {
+            getMessage(user1Id: userId, user2Id: 1)
+        }
+    }
+
+    // MARK: Private functions
+    private func getMessage(user1Id: Int, user2Id: Int) {
+        self.message = MockData.sharedInstance.getMessageDetail(user1Id: user1Id, user2Id: user2Id)
+        
+        DispatchQueue.main.async {
+            self.messageTableView?.reloadData()
+        }
+    }
+}
+
+extension MessageDetailViewController: UITableViewDelegate {
+    
+}
+
+extension MessageDetailViewController: UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return message?.messageDetailArray.count ?? 0
     }
-    */
-
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "messageDetailTableViewCell", for: indexPath) as! MessageDetailTableViewCell
+        
+        let currentMessage = message?.messageDetailArray[indexPath.row]
+        //        cell.titleLabel.text = currentPost.title
+        cell.messageLabel.text = currentMessage?.message
+        cell.dateLabel.text = currentMessage?.dateTime
+        
+        cell.preservesSuperviewLayoutMargins = false
+        cell.separatorInset = UIEdgeInsets.zero
+        cell.layoutMargins = UIEdgeInsets.zero
+        
+        if (indexPath.row)%2 == 1 {
+            cell.userImage?.image = UIImage(named: "profile_girl")
+        }
+        
+        return cell
+    }
+    
 }
