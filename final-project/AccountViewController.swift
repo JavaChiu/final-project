@@ -23,17 +23,15 @@ class AccountViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var addressField: UITextField!
     @IBOutlet weak var userImageView: UIImageView!
-    @IBOutlet weak var editBarButton: UIBarButtonItem!
     
-    // MARK: Actions
-    @IBAction func editPressed(_ sender: Any) {
+    @objc func editPressed(_ sender: Any) {
         if !isEditable {
             addPanGesturesToView(userImageView)
             self.userNameField.isUserInteractionEnabled = true
             self.emailField.isUserInteractionEnabled = true
             self.addressField.isUserInteractionEnabled = true
-            self.editBarButton.title = "Done"
             self.isEditable = true
+            addDoneBarButton()
         } else {
             if let recognizers = userImageView.gestureRecognizers {
                 for recognizer in recognizers {
@@ -43,8 +41,8 @@ class AccountViewController: UIViewController, UITextFieldDelegate {
             self.userNameField.isUserInteractionEnabled = false
             self.emailField.isUserInteractionEnabled = false
             self.addressField.isUserInteractionEnabled = false
-            self.editBarButton.title = "Edit"
             self.isEditable = false
+            addEditBarButton()
         }
     }
     
@@ -62,6 +60,8 @@ class AccountViewController: UIViewController, UITextFieldDelegate {
         loginButton.center = center
         loginButton.delegate = self
         view.addSubview(loginButton)
+        
+        addEditBarButton()
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -113,6 +113,16 @@ class AccountViewController: UIViewController, UITextFieldDelegate {
         textField.resignFirstResponder()
         return true
     }
+    
+    private func addEditBarButton() {
+        let button = UIBarButtonItem.init(barButtonSystemItem: .edit, target: self, action: #selector(editPressed))
+        self.navigationItem.setRightBarButton(button, animated: false)
+    }
+    
+    private func addDoneBarButton() {
+        let button = UIBarButtonItem.init(barButtonSystemItem: .done, target: self, action: #selector(editPressed))
+        self.navigationItem.setRightBarButton(button, animated: false)
+    }
 }
 
 extension AccountViewController: LoginButtonDelegate {
@@ -121,7 +131,7 @@ extension AccountViewController: LoginButtonDelegate {
         self.getFBUserData()
         let credential = FacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
         Auth.auth().signIn(with: credential) { (user, error) in
-            if let error = error {
+            if let _ = error {
                 // ...
                 return
             }

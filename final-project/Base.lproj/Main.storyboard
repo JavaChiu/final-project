@@ -366,16 +366,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="r2x-gd-IPL"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Account" id="0na-E7-qwS">
-                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="A7L-a5-IZQ">
-                            <connections>
-                                <action selector="editPressed:" destination="9lY-Nb-Xk1" id="utD-D8-3Sn"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Account" id="0na-E7-qwS"/>
                     <connections>
                         <outlet property="addressField" destination="SCQ-0d-vJk" id="0fJ-E3-Jf3"/>
-                        <outlet property="editBarButton" destination="A7L-a5-IZQ" id="yk6-nW-Ima"/>
                         <outlet property="emailField" destination="NTs-i8-VSg" id="IMR-PQ-6kP"/>
                         <outlet property="userImageView" destination="VxB-hc-w7l" id="7j9-fL-uo2"/>
                         <outlet property="userNameField" destination="Vx3-dA-7HP" id="jJh-Hq-83d"/>
