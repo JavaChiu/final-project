@@ -21,7 +21,7 @@ class MessageDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        setUpToolBar()
+//        setUpToolBar()
         newMessageTextField.delegate = self
         
         self.messageTableView.dataSource = self
@@ -54,7 +54,7 @@ class MessageDetailViewController: UIViewController {
         
         items.append(UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil))
         
-        items.append(UIBarButtonItem(title: "Request", style: .plain, target: self, action: #selector(request)))
+//        items.append(UIBarButtonItem(title: "Request", style: .plain, target: self, action: #selector(request)))
         items.append(UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil))
         
         
