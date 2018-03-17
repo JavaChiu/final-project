@@ -12,24 +12,51 @@ import FacebookLogin
 import FBSDKLoginKit
 import FirebaseAuth
 
-class AccountViewController: UIViewController {
+class AccountViewController: UIViewController, UITextFieldDelegate {
     // MARK: Properties
     var dict : [String : AnyObject]!
+    var isEditable = false
+    let addPhoto = UIImage(named: "add_photo2")
     
     // MARK: Outlets
     @IBOutlet weak var userNameField: UITextField!
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var addressField: UITextField!
-
+    @IBOutlet weak var userImageView: UIImageView!
+    @IBOutlet weak var editBarButton: UIBarButtonItem!
+    
     // MARK: Actions
     @IBAction func editPressed(_ sender: Any) {
+        if !isEditable {
+            addPanGesturesToView(userImageView)
+            self.userNameField.isUserInteractionEnabled = true
+            self.emailField.isUserInteractionEnabled = true
+            self.addressField.isUserInteractionEnabled = true
+            self.editBarButton.title = "Done"
+            self.isEditable = true
+        } else {
+            if let recognizers = userImageView.gestureRecognizers {
+                for recognizer in recognizers {
+                    userImageView.removeGestureRecognizer(recognizer)
+                }
+            }
+            self.userNameField.isUserInteractionEnabled = false
+            self.emailField.isUserInteractionEnabled = false
+            self.addressField.isUserInteractionEnabled = false
+            self.editBarButton.title = "Edit"
+            self.isEditable = false
+        }
     }
     
     
     // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        self.userNameField.delegate = self
+        self.emailField.delegate = self
+        self.addressField.delegate = self
+        
         let loginButton = LoginButton(readPermissions: [ .publicProfile ])
         let center = CGPoint.init(x: self.view.frame.width/2, y: self.view.frame.height-100)
         loginButton.center = center
@@ -55,6 +82,36 @@ class AccountViewController: UIViewController {
                 }
             })
         }
+    }
+    
+    /// Add tap gestures to a view
+    /// - Parameter view: The view to attach the gestures to
+    func addPanGesturesToView(_ view: UIView) {
+        view.isUserInteractionEnabled = true
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(NewPostViewController.addNewMedia(_:)))
+        view.addGestureRecognizer(tapGesture)
+    }
+    
+    /// Show and Hide the navigation bar and adjust size of image view
+    /// - Parameter recognizer: The gesture that is recognized
+    @objc func addNewMedia(_ recognizer:UITapGestureRecognizer) {
+        self.view.endEditing(true)
+        MediaManager.shared.showActionSheet(vc: self, removePhoto: !(userImageView.image==addPhoto))
+        MediaManager.shared.imageProcessing = {(image) in
+            if let image = image {
+                self.userImageView.image = image
+                self.userImageView.contentMode = .scaleAspectFit
+            } else {
+                self.userImageView.image = self.addPhoto
+                self.userImageView.contentMode = .scaleAspectFit
+            }
+        }
+    }
+    
+    // MARK: UITextField Delegate Methods
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 }
 
