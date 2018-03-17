@@ -20,6 +20,8 @@ class MessageViewController: UIViewController {
 
         self.messageTableView.delegate = self
         self.messageTableView.dataSource = self
+        
+        self.navigationController?.isToolbarHidden = true
     }
 
     override func viewWillAppear(_ animated: Bool) {

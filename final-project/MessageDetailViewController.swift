@@ -15,11 +15,15 @@ class MessageDetailViewController: UIViewController {
     var userId: Int?
     
     // MARK: Outletes
-    @IBOutlet weak var messageTableView: UITableView!
+    @IBOutlet weak var messageTableView: UITableView!    
+    @IBOutlet weak var newMessageTextField: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        setUpToolBar()
+        newMessageTextField.delegate = self
+        
         self.messageTableView.dataSource = self
         self.messageTableView.delegate = self
         self.messageTableView.estimatedRowHeight = 200
@@ -41,6 +45,21 @@ class MessageDetailViewController: UIViewController {
         DispatchQueue.main.async {
             self.messageTableView?.reloadData()
         }
+    }
+    
+    private func setUpToolBar() {
+        self.navigationController?.isToolbarHidden = false
+        
+        var items = [UIBarButtonItem]()
+        
+        items.append(UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil))
+        
+        items.append(UIBarButtonItem(title: "Request", style: .plain, target: self, action: #selector(request)))
+        items.append(UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil))
+        
+        
+        self.toolbarItems = items
+        
     }
 }
 
@@ -76,4 +95,11 @@ extension MessageDetailViewController: UITableViewDataSource {
         return cell
     }
     
+}
+
+extension MessageDetailViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
 }

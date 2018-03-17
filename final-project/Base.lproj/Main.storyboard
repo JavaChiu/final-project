@@ -670,6 +670,24 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="DmF-FQ-VFT">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <toolbar key="tableFooterView" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="73p-Ul-zpk">
+                                    <rect key="frame" x="0.0" y="230" width="375" height="44"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                    <items>
+                                        <barButtonItem style="plain" id="tgi-b2-j9O">
+                                            <textField key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" id="Zqu-AC-1dD">
+                                                <rect key="frame" x="16" y="7" width="291" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <nil key="textColor"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                                            </textField>
+                                        </barButtonItem>
+                                        <barButtonItem style="plain" systemItem="flexibleSpace" id="AhR-IS-r36"/>
+                                        <barButtonItem systemItem="add" id="O3o-vT-eHu"/>
+                                        <barButtonItem width="10" style="plain" systemItem="fixedSpace" id="paP-h9-YUs"/>
+                                    </items>
+                                </toolbar>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="messageDetailTableViewCell" rowHeight="202" id="6PW-Di-eYQ" customClass="MessageDetailTableViewCell" customModule="final_project" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="202"/>
@@ -738,6 +756,7 @@
                     </view>
                     <connections>
                         <outlet property="messageTableView" destination="DmF-FQ-VFT" id="TQA-5Q-fCQ"/>
+                        <outlet property="newMessageTextField" destination="Zqu-AC-1dD" id="FnB-1G-gbj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Aaf-FH-aMW" userLabel="First Responder" sceneMemberID="firstResponder"/>
