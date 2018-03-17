@@ -223,7 +223,7 @@ var messageDictionary = [
         [
             "id": 0,
             "message": " Hey you here me? Let's try a long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long message",
-            "dateTime": "2018-03-16T14:00:56.897Z",
+            "dateTime": "2018-03-16 14:00",
             "user1": [
                 "id": 1,
                 "address": "somewhere",
@@ -244,7 +244,7 @@ var messageDictionary = [
         [
             "id": 2,
             "message": "Yes I do!!! Very CooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooL!",
-            "dateTime": "2018-03-16T14:00:56.897Z",
+            "dateTime": "2018-03-16 14:00",
             "user1": [
                 "id": 1,
                 "address": "somewhere",
@@ -265,7 +265,7 @@ var messageDictionary = [
         [
             "id": 3,
             "message": "Glad you like it :)",
-            "dateTime": "2018-03-16T14:00:56.897Z",
+            "dateTime": "2018-03-16 14:00",
             "user1": [
                 "id": 1,
                 "address": "somewhere",

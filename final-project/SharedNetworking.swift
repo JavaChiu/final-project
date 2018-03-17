@@ -21,7 +21,7 @@ class SharedNetworking {
     
     var firebaseID: String? = nil {
         didSet {
-            print(firebaseID)
+            print(firebaseID ?? "firebaseID not found")
         }
     }
     
@@ -54,7 +54,7 @@ class SharedNetworking {
                     let url = metadata!.downloadURL()
                     self.cache.setObject(image, forKey: url?.absoluteString
                         as AnyObject)
-                    print(url?.absoluteString)
+                    print(url?.absoluteString ?? "no url")
                     completion(url)
                 }
             }
@@ -92,7 +92,10 @@ class SharedNetworking {
                 } catch {
                     ErrorHandler.showError(for: error)
                 }
-            } else { ErrorHandler.showError(for: SharedNetworkingError.invalidFirebaseDBData)}
+            } else {
+                ErrorHandler.showError(for: SharedNetworkingError.invalidFirebaseDBData)
+                
+            }
         }
     }
     
@@ -113,7 +116,10 @@ class SharedNetworking {
                 } catch {
                     ErrorHandler.showError(for: error)
                 }
-            } else { ErrorHandler.showError(for: SharedNetworkingError.invalidFirebaseDBData)}
+            } else {
+                ErrorHandler.showError(for: SharedNetworkingError.invalidFirebaseDBData)
+                
+            }
         }
     }
     
@@ -121,7 +127,7 @@ class SharedNetworking {
     func getImage(urlString: String, completion:@escaping ((UIImage?) -> Void)) {
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
 
-        guard let url = URL(string: urlString) else {
+        guard let _ = URL(string: urlString) else {
             ErrorHandler.showError(for: SharedNetworkingError.invalidURL)
             return
         }
