@@ -19,11 +19,7 @@ class SharedNetworking {
     static let shared = SharedNetworking()
     private init() {}
     
-    var firebaseID: String? = nil {
-        didSet {
-            print(firebaseID)
-        }
-    }
+    var firebaseID: String? = nil
     
     // Local cache used to store temporary images
     let cache = NSCache<AnyObject, AnyObject>()
