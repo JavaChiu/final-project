@@ -131,8 +131,8 @@ extension AccountViewController: LoginButtonDelegate {
         self.getFBUserData()
         let credential = FacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
         Auth.auth().signIn(with: credential) { (user, error) in
-            if let _ = error {
-                // ...
+            if let error = error {
+                ErrorHandler.showError(for: error)
                 return
             }
             SharedNetworking.shared.firebaseID = user!.uid
