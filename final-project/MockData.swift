@@ -26,6 +26,17 @@ class MockData {
         return posts!
     }
     
+    func getMyPosts() -> Posts {
+        var myPosts: Posts? = nil
+        do {
+            let decoder = JSONDecoder()
+            myPosts = try decoder.decode(Posts.self, from: (myPostJsonString?.data(using: String.Encoding.utf8.rawValue))!)
+        } catch {
+            print("Error serializing/decoding JSON: \(error)")
+        }
+        return myPosts!
+    }
+    
     func getItemImage(url: URL) -> UIImage {
         var itemImage:UIImage? = nil
         
@@ -171,6 +182,52 @@ var mockDictionary = [
 
 let jsonData = try! JSONSerialization.data(withJSONObject: mockDictionary)
 let jsonString = NSString(data: jsonData, encoding: String.Encoding.utf8.rawValue)
+
+var myPost = [
+    "postArray": [
+        [
+            "id": 1,
+            "title": "Some pizzas from party last night",
+            "description": "From last night's party. Ordered too much.From last night's party. Ordered too much.From last night's party. Ordered too much.From last night's party. Ordered too much.",
+            "imgURL": "imgs/1.png",
+            "gived": false,
+            "pickupAddress": "5400 South Drexel Avenue",
+            "date": "2018-03-13",
+            "user": [
+                "id": 1,
+                "address": "somewhere",
+                "description": "description",
+                "email": "String",
+                "facebookId": 123,
+                "userName": "AChiu"
+            ],
+            "longitude": -88,
+            "latitude": 42
+        ],
+        [
+            "id": 2,
+            "title": "Sandwiches, still good",
+            "description": "first desc",
+            "imgURL": "imgs/2.png",
+            "gived": false,
+            "pickupAddress": "5400 South Drexel Avenue",
+            "date": "2018-03-13",
+            "user": [
+                "id": 1,
+                "address": "somewhere",
+                "description": "description",
+                "email": "String",
+                "facebookId": 123,
+                "userName": "AChiu"
+            ],
+            "longitude": -89,
+            "latitude": 41
+        ]
+    ]
+]
+
+let myPostJsonData = try! JSONSerialization.data(withJSONObject: myPost)
+let myPostJsonString = NSString(data: myPostJsonData, encoding: String.Encoding.utf8.rawValue)
 
 var messageOverViewDictionary = [
     "messageOverViewArray": [

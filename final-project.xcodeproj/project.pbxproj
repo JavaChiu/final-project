@@ -79,6 +79,8 @@
 		C83D20C5205B7B2C0051E378 /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C83D20C4205B7B2C0051E378 /* MessageTableViewCell.swift */; };
 		C83D20C7205B82790051E378 /* MessageDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C83D20C6205B82790051E378 /* MessageDetailViewController.swift */; };
 		C83D20C9205B832D0051E378 /* MessageDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C83D20C8205B832D0051E378 /* MessageDetailTableViewCell.swift */; };
+		C84D9571205DDD0700EEA794 /* MyPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C84D9570205DDD0700EEA794 /* MyPostViewController.swift */; };
+		C84D9573205DDD4C00EEA794 /* MyPostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C84D9572205DDD4C00EEA794 /* MyPostTableViewCell.swift */; };
 		C883BA15205A32480036EF0A /* Splash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C883BA14205A32480036EF0A /* Splash.storyboard */; };
 		C892A2F7203A82A5000807D6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C892A2F6203A82A5000807D6 /* AppDelegate.swift */; };
 		C892A2FB203A82A5000807D6 /* NewPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C892A2FA203A82A5000807D6 /* NewPostViewController.swift */; };
@@ -168,6 +170,8 @@
 		C83D20C4205B7B2C0051E378 /* MessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
 		C83D20C6205B82790051E378 /* MessageDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageDetailViewController.swift; sourceTree = "<group>"; };
 		C83D20C8205B832D0051E378 /* MessageDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageDetailTableViewCell.swift; sourceTree = "<group>"; };
+		C84D9570205DDD0700EEA794 /* MyPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPostViewController.swift; sourceTree = "<group>"; };
+		C84D9572205DDD4C00EEA794 /* MyPostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPostTableViewCell.swift; sourceTree = "<group>"; };
 		C883BA14205A32480036EF0A /* Splash.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Splash.storyboard; sourceTree = "<group>"; };
 		C892A2F3203A82A5000807D6 /* final-project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "final-project.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C892A2F6203A82A5000807D6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -525,6 +529,8 @@
 				C892A31A2045CE07000807D6 /* LoginViewController.swift */,
 				513547D4204CAEB5003BEC7F /* MainFeedTableViewCell.swift */,
 				513547D5204CAEB5003BEC7F /* MainFeedViewController.swift */,
+				C84D9570205DDD0700EEA794 /* MyPostViewController.swift */,
+				C84D9572205DDD4C00EEA794 /* MyPostTableViewCell.swift */,
 				513547D6204CAEB5003BEC7F /* MapAnnotation.swift */,
 				C83D20C2205B7AEF0051E378 /* MessageViewController.swift */,
 				C83D20C4205B7B2C0051E378 /* MessageTableViewCell.swift */,
@@ -721,6 +727,7 @@
 				C8A8C8FE2055FC4300046D03 /* SharedNetworking.swift in Sources */,
 				513547D7204CAEB5003BEC7F /* MockData.swift in Sources */,
 				51E4C1BF2055BE1B00A2FEA5 /* UIView+Extensions.swift in Sources */,
+				C84D9573205DDD4C00EEA794 /* MyPostTableViewCell.swift in Sources */,
 				51CF2690205B0BDF00CDECBB /* UIImageExtension.swift in Sources */,
 				51E4C1E22055BE1C00A2FEA5 /* ContactCell.swift in Sources */,
 				5149A3552055DCB200009D39 /* UIViewControllerExtension.swift in Sources */,
@@ -759,6 +766,7 @@
 				51E4C1D52055BE1C00A2FEA5 /* TwoTextFieldsViewController.swift in Sources */,
 				51E4C1D32055BE1C00A2FEA5 /* CurrencyCell.swift in Sources */,
 				51E4C1E42055BE1C00A2FEA5 /* DatePickerViewController.swift in Sources */,
+				C84D9571205DDD0700EEA794 /* MyPostViewController.swift in Sources */,
 				51E4C1BC2055BE1B00A2FEA5 /* UISegmentedControl+Extensions.swift in Sources */,
 				51E4C1C42055BE1B00A2FEA5 /* UIImage+Extensions.swift in Sources */,
 				51E4C1DE2055BE1C00A2FEA5 /* PickerViewViewController.swift in Sources */,
@@ -918,7 +926,7 @@
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/final-project/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "uchicago.mobi.final-project1";
+				PRODUCT_BUNDLE_IDENTIFIER = "uchicago.mobi.final-project";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
@@ -940,7 +948,7 @@
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/final-project/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "uchicago.mobi.final-project1";
+				PRODUCT_BUNDLE_IDENTIFIER = "uchicago.mobi.final-project";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
